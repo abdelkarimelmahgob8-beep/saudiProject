@@ -1,0 +1,875 @@
+/* =================================================================
+   AMBAR — Landing Page Styles
+   Background image integrated
+   ================================================================= */
+
+:root{
+  /* ---- Color ---- */
+  --color-ink:         #1C1A17;
+  --color-ink-soft:    #55504A;
+  --color-accent:      #7A6238;
+  --color-accent-soft: #B9A47C;
+  --color-line:        #E4DDCF;
+  --color-shadow:      rgba(28, 26, 23, 0.10);
+
+  /* ---- Background ---- */
+  --color-bg:          #F8F5EF;
+  --color-bg-alt:      rgba(255, 255, 255, 0.72);
+
+  /*
+    ================================================================
+    WEBSITE BACKGROUND IMAGE
+    CHANGE ONLY THE IMAGE NAME HERE
+    Example:
+    --site-bg-image: url("./background.jpg");
+    ================================================================
+  */
+  --site-bg-image: url("./website_background_1920x1080.png");
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-arabic:  'Tajawal', var(--font-body);
+
+  /* ---- Layout ---- */
+  --content-width: 1180px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 2.75rem;
+  --space-5: 4.5rem;
+  --space-6: 7rem;
+
+  --radius-card: 6px;
+  --radius-btn: 999px;
+
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =================================================================
+   REDUCED MOTION
+   ================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* =================================================================
+   RESET & BASE
+   ================================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+
+  color: var(--color-ink);
+
+  /*
+    ================================================================
+    WEBSITE BACKGROUND
+    ================================================================
+  */
+
+  background-image:
+   
+    var(--site-bg-image);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+
+  /*
+    Keeps the background visually fixed while scrolling.
+  */
+  background-attachment: fixed;
+
+  /*
+    Prevents horizontal overflow.
+  */
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  margin: 0;
+  color: var(--color-ink);
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+
+/* =================================================================
+   SCREEN READER ONLY
+   ================================================================= */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =================================================================
+   HERO
+   ================================================================= */
+
+.hero {
+  position: relative;
+
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  /*
+    IMPORTANT:
+    Transparent background allows the body background image
+    to remain visible.
+  */
+  background:
+    radial-gradient(
+      ellipse 900px 600px at 78% 15%,
+      rgba(122, 98, 56, 0.10),
+      transparent 60%
+    ),
+    transparent;
+}
+
+
+/* =================================================================
+   HERO NAVIGATION
+   ================================================================= */
+
+.hero-nav {
+  padding: var(--space-3) var(--space-5);
+}
+
+.hero-nav__mark {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+
+/* =================================================================
+   HERO INNER
+   ================================================================= */
+
+.hero-inner {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+
+  align-items: center;
+
+  gap: var(--space-4);
+
+  max-width: var(--content-width);
+  width: 100%;
+
+  margin: 0 auto;
+
+  padding:
+    var(--space-4)
+    var(--space-5)
+    ;
+}
+.hero-inner .hero-message {
+  font-family: var(--font-arabic);
+  font-size: 2rem;
+  line-height: 1.65;
+  color: var(--color-ink-soft);
+}
+
+
+/* =================================================================
+   HERO COPY
+   ================================================================= */
+
+.hero-copy {
+  opacity: 0;
+
+  transform: translateY(18px);
+
+  animation:
+    hero-rise
+    0.9s
+    var(--ease-standard)
+    0.15s
+    forwards;
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-kicker {
+  font-size: 0.8125rem;
+
+  color: var(--color-ink-soft);
+
+  letter-spacing: 0.03em;
+
+  margin-bottom: var(--space-2);
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+
+  font-size: clamp(2.75rem, 6vw, 4.75rem);
+
+  line-height: 1.05;
+
+  letter-spacing: -0.01em;
+
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.hero-title__line--em {
+  font-style: italic;
+
+  color: var(--color-accent);
+
+  font-weight: 400;
+}
+
+.hero-message {
+  margin-top: var(--space-3);
+
+  max-width: 34ch;
+
+  font-size: 1.125rem;
+
+  color: var(--color-ink-soft);
+
+  line-height: 1.65;
+}
+
+
+/* =================================================================
+   HERO VISUAL
+   ================================================================= */
+
+.hero-visual {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+
+  animation:
+    hero-fade-in
+    1.2s
+    var(--ease-standard)
+    0.4s
+    forwards;
+}
+
+@keyframes hero-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-motif {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+.motif-ring {
+  fill: none;
+
+  stroke: var(--color-accent-soft);
+
+  stroke-width: 1;
+
+  opacity: 0.55;
+}
+
+.motif-ring--2 {
+  opacity: 0.35;
+}
+
+.motif-star path {
+  fill: none;
+
+  stroke: var(--color-accent);
+
+  stroke-width: 1.25;
+
+  stroke-linejoin: round;
+}
+
+
+/* =================================================================
+   HERO SCROLL CUE
+   ================================================================= */
+
+.hero-scroll-cue {
+  display: flex;
+
+  justify-content: center;
+
+  padding-bottom: var(--space-3);
+
+  opacity: 0;
+
+  animation:
+    hero-fade-in
+    1s
+    var(--ease-standard)
+    0.9s
+    forwards;
+}
+
+.hero-scroll-cue span {
+  width: 1px;
+
+  height: 38px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--color-accent-soft),
+      transparent
+    );
+}
+
+
+/* =================================================================
+   DECORATIVE DIVIDER
+   ================================================================= */
+
+.divider {
+  display: flex;
+
+  justify-content: center;
+
+  padding: var(--space-2) 0;
+}
+
+.divider__motif {
+  width: 120px;
+
+  height: 24px;
+
+  stroke: var(--color-accent-soft);
+
+  stroke-width: 1;
+
+  fill: none;
+}
+
+
+/* =================================================================
+   REVEAL ON SCROLL
+   ================================================================= */
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(24px);
+
+  transition:
+    opacity 0.8s var(--ease-standard),
+    transform 0.8s var(--ease-standard);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =================================================================
+   PRODUCTS INTRO
+   ================================================================= */
+
+.intro {
+  max-width: 640px;
+
+  margin: 0 auto;
+
+  padding:
+    var(--space-4)
+    var(--space-5)
+    var(--space-3);
+
+  text-align: center;
+}
+
+.intro-title {
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+
+  margin-bottom: var(--space-2);
+}
+
+.intro-text {
+  color: var(--color-ink-soft);
+
+  font-size: 1.0625rem;
+
+  line-height: 1.7;
+}
+.intro-services-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.intro-services-list li {
+  background: #f5f5f5;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+
+/* =================================================================
+   PRODUCTS GALLERY
+   ================================================================= */
+
+.gallery {
+  max-width: var(--content-width);
+
+  margin: 0 auto;
+
+  padding:
+    var(--space-4)
+    var(--space-5)
+    var(--space-6);
+}
+
+.gallery-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: var(--space-3);
+}
+
+
+/* =================================================================
+   PRODUCT CARD
+   ================================================================= */
+
+.product-card {
+  background: var(--color-bg-alt);
+
+  border-radius: var(--radius-card);
+
+  overflow: hidden;
+
+  border: 1px solid var(--color-line);
+
+  transition:
+    box-shadow 0.35s var(--ease-standard),
+    transform 0.35s var(--ease-standard);
+
+  /*
+    Gives the cards a subtle glass-like separation
+    from the background image.
+  */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.product-card:hover,
+.product-card:focus-within {
+  box-shadow:
+    0 18px 40px -12px var(--color-shadow);
+
+  transform: translateY(-4px);
+}
+
+
+/* =================================================================
+   PRODUCT IMAGE
+   ================================================================= */
+
+.product-card__media {
+  position: relative;
+
+  aspect-ratio: 4 / 5;
+
+  overflow: hidden;
+
+  background: var(--color-line);
+}
+
+.product-card__media img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.6s var(--ease-standard);
+}
+
+.product-card:hover .product-card__media img,
+.product-card:focus-within .product-card__media img {
+  transform: scale(1.06);
+}
+
+
+/* =================================================================
+   PRODUCT BODY
+   ================================================================= */
+
+.product-card__body {
+  padding: var(--space-3);
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+
+  font-size: 1.15rem;
+
+  font-weight: 500;
+
+  margin-bottom: 0.4rem;
+}
+
+.product-card__desc {
+  font-size: 0.9375rem;
+
+  color: var(--color-ink-soft);
+
+  line-height: 1.55;
+}
+
+.product-card__price {
+  margin-top: var(--space-2);
+
+  font-size: 0.9375rem;
+
+  color: var(--color-accent);
+
+  font-weight: 500;
+}
+
+
+/* =================================================================
+   FLOATING WHATSAPP BUTTON
+   ================================================================= */
+
+.whatsapp-btn {
+  position: fixed;
+
+  right: var(--space-3);
+
+  bottom: var(--space-3);
+
+  z-index: 40;
+
+  width: 56px;
+
+  height: 56px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #25D366;
+
+  color: #fff;
+
+  box-shadow:
+    0 10px 28px -8px rgba(37, 211, 102, 0.55);
+
+  transition:
+    transform 0.3s var(--ease-standard),
+    box-shadow 0.3s var(--ease-standard);
+}
+
+.whatsapp-btn:hover,
+.whatsapp-btn:focus-visible {
+  transform:
+    translateY(-3px)
+    scale(1.05);
+
+  box-shadow:
+    0 14px 34px -8px rgba(37, 211, 102, 0.65);
+}
+
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+
+.footer {
+  border-top: 1px solid var(--color-line);
+
+  padding:
+    var(--space-4)
+    var(--space-5)
+    var(--space-5);
+
+  /*
+    Keep footer transparent so the website
+    background remains visible.
+  */
+  background: transparent;
+}
+
+.footer-inner {
+  max-width: var(--content-width);
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: var(--space-2);
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+
+  font-size: 1.25rem;
+
+  letter-spacing: 0.02em;
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+
+  color: var(--color-ink-soft);
+}
+
+.footer-credit {
+  margin-top: var(--space-2);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  font-size: 0.75rem;
+
+  color: var(--color-ink-soft);
+
+  opacity: 0.8;
+
+  line-height: 1.5;
+}
+
+.footer-credit svg {
+  flex-shrink: 0;
+
+  color: var(--color-accent-soft);
+}
+
+
+/* =================================================================
+   RESPONSIVE — TABLET
+   ================================================================= */
+
+@media (max-width: 1024px) {
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+/* =================================================================
+   RESPONSIVE — MOBILE / TABLET
+   ================================================================= */
+
+@media (max-width: 900px) {
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+
+    text-align: left;
+
+    padding:
+      var(--space-3)
+      var(--space-3)
+      var(--space-4);
+  }
+
+  .hero-visual {
+    order: -1;
+
+    max-width: 260px;
+
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: clamp(2.1rem, 9vw, 3.25rem);
+  }
+
+  .hero-inner .hero-message {
+    font-size: 1.25rem;
+  }
+
+  .hero-nav {
+    padding:
+      var(--space-2)
+      var(--space-3);
+  }
+
+  .intro {
+    padding:
+      var(--space-4)
+      var(--space-3)
+      var(--space-2);
+  }
+
+  .gallery {
+    padding:
+      var(--space-3)
+      var(--space-3)
+      var(--space-5);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: var(--space-2);
+  }
+
+  .footer {
+    padding:
+      var(--space-4)
+      var(--space-3);
+  }
+
+  /*
+    ================================================================
+    MOBILE BACKGROUND IMAGE
+    Swaps in a portrait-oriented version of the background so the
+    flag/emblem corners stay visible on tall, narrow screens instead
+    of being cropped out by "cover" on a landscape image.
+    ================================================================
+  */
+  body {
+    background-image:
+      url("./website_background_mobile_1080x1920_optimized.png");
+    background-size: cover;
+    background-position: center;
+
+    /*
+      "fixed" backgrounds are unreliable on mobile browsers
+      (iOS Safari in particular repaints/jumps on scroll).
+      Switch to a normal scrolling background for the whole
+      mobile/tablet range, not just very small screens.
+    */
+    background-attachment: scroll;
+  }
+
+}
+
+
+/* =================================================================
+   RESPONSIVE — SMALL MOBILE
+   ================================================================= */
+
+@media (max-width: 520px) {
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+
+    max-width: 380px;
+
+    margin: 0 auto;
+  }
+
+  .hero-message {
+    max-width: 100%;
+  }
+
+  .intro-services-list {
+    grid-template-columns: 1fr;
+  }
+
+  .whatsapp-btn {
+    width: 52px;
+
+    height: 52px;
+
+    right: max(var(--space-2), env(safe-area-inset-right));
+
+    bottom: max(var(--space-2), env(safe-area-inset-bottom));
+  }
+
+}
