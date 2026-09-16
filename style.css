@@ -827,7 +827,8 @@ p {
       url("./website_background_mobile_1080x1920_optimized.png");
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    
+
   }
 
 }
